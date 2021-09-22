@@ -9,7 +9,7 @@ class Article(models.Model):
     title = models.CharField(max_length=100)
     author = models.CharField(max_length=100)
     email = models.EmailField(max_length=100)
-    # owner = models.ForeignKey('auth.User', related_name='article', on_delete=models.CASCADE, null=True)
+    owner = models.ForeignKey('auth.User', related_name='article', on_delete=models.CASCADE, null=True)
     date = models.DateTimeField(default=timezone.now)
 
     def save(self, *args, **kwargs):

@@ -10,12 +10,12 @@ router.register('article', views.ArticleViewset, basename='article')
 urlpatterns = [
 
     # path('',views.Article_list, name='article-list' ),
-    path('',views.ArticleAPIView.as_view(), name='article-list' ),
+    # path('',views.ArticleAPIView.as_view(), name='article-list' ),
 
     path('detail/<int:pk>/',views.article_detail, name='article-detail' ),
     path('detail/<int:id>/', views.ArticleDetails.as_view(), name='article-detail' ),
 
-    # path('', views.api_root),
+    path('', views.api_root),
 
     path('article/', views.GenericView.as_view(), name='article-generic-list'),
     path('<int:id>/', views.GenericView.as_view(), name='article-generic'),
@@ -23,11 +23,6 @@ urlpatterns = [
     path('viewset/', include(router.urls)),
     path('viewset/<int:pk>/', include(router.urls)),
 
-    # path('users/',
-    #      views.UserList.as_view(),
-    #      name='user-list'),
-    #
-    # path('users/<int:pk>/',
-    #      views.UserDetail.as_view(),
-    #      name='user-detail'),
+    path('users/', views.UserList.as_view(), name='user-list'),
+    path('users/<int:pk>/', views.UserDetail.as_view(), name='user-detail'),
 ]

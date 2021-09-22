@@ -4,12 +4,12 @@ from django.shortcuts import render
 from rest_framework import permissions
 
 from .models import Article
-from .serializers import ArticleSerializer #, UserSerializer
+from .serializers import ArticleSerializer, UserSerializer
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.views import APIView
+from rest_framework.views import APIView # class based views
 
 from rest_framework import generics
 from rest_framework import mixins
@@ -23,21 +23,21 @@ from django.shortcuts import get_object_or_404
 from rest_framework.reverse import reverse
 from django.contrib.auth.models import User
 
-# @api_view(['GET'])
-# def api_root(request, format=None):
-#     return Response({
-#         'users': reverse('user-list', request=request, format=format),
-#         'article': reverse('article-list', request=request, format=format)
-#     })
+@api_view(['GET'])
+def api_root(request, format=None):
+    return Response({
+        'users': reverse('user-list', request=request, format=format),
+        'article': reverse('article-list', request=request, format=format)
+    })
 
-# class UserList(generics.ListAPIView):
-#     queryset = User.objects.all()
-#     serializer_class = UserSerializer
-#
-#
-# class UserDetail(generics.RetrieveAPIView):
-#     queryset = User.objects.all()
-#     serializer_class = UserSerializer
+class UserList(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+class UserDetail(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
 # ModelViewset
 class ArticleViewset(viewsets.ModelViewSet):

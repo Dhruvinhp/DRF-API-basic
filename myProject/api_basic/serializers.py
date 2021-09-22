@@ -21,18 +21,17 @@ from django.contrib.auth.models import User
 #         instance.save()
 #         return instance
 
-
-# you can use ModelSerializer to get rid of extra code
+# you can also use ModelSerializer to get rid of extra code
 class ArticleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Article
         # fields = ['id', 'title', 'author', 'email']
         fields = '__all__'
 
-# class UserSerializer(serializers.HyperlinkedModelSerializer):
-#     article = serializers.HyperlinkedRelatedField(many=True, view_name='article-detail', read_only=True)
-#     owner = serializers.ReadOnlyField(source='owner.username')
-#
-#     class Meta:
-#         model = User
-#         fields = ['url', 'id', 'username', 'article', 'owner']
+class UserSerializer(serializers.HyperlinkedModelSerializer):
+    article = serializers.HyperlinkedRelatedField(many=True, view_name='article-detail', read_only=True)
+    owner = serializers.ReadOnlyField(source='owner.username')
+
+    class Meta:
+        model = User
+        fields = ['url', 'id', 'username', 'article', 'owner']
